@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const http = require('http');
 const https = require('https');
 const puppeteer = require('puppeteer-core');
 const queryString = require('query-string');
@@ -60,7 +61,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
             const file = fs.createWriteStream(filename);
 
             // 开始下载
-            https.get(href, response => {
+            http.get(href, response => {
               response.pipe(file);
               file.on('finish', () => file.close());
             });
